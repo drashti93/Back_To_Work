@@ -1,0 +1,32 @@
+#f5logo{
+    height: 50px;
+    /* width: 50px; */
+}
+
+#welcome-message {
+    display: inline-block;
+}
+
+.message-container{
+    text-align: center;
+    margin-top: 20px;
+}
+
+#admin-dropdown {
+    position: static;
+}
+
+.error-span {
+    color:red;
+}
+
+#message-h4 {
+    float: none;
+    background: #FC4A1A;
+    color: white;
+}
+
+.fontawesome-li {
+    display: inline;
+}
+

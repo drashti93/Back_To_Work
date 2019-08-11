@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import {BrowserRouter,Route,Switch} from 'react-router-dom';
+import LandingPage from "./components/landingPage/landingPage"
+import * as actions from "../src/actions/auth"
+import {connect} from 'react-redux';
 
-function App() {
+class App extends Component {
+
+  constructor(props){
+		super(props) ;
+
+		this.state = {
+            isLogged: '',
+            isHidden: '',
+            username: '',
+		}
+	}
+
+  componentDidMount(){
+      // this.props.checkSession();
+  }
+  
+render(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={LandingPage}></Route>
+        
+      </Switch>
+    </BrowserRouter>
+    );
+  }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+      // isLogged:state.auth.isLogged,
+      // isHidden: state.auth.isHidden,
+      // username:state.auth.username
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+      // checkSession: () => dispatch(actions.checkSession())
+  };
+}
+
+export default connect(mapStateToProps , mapDispatchToProps )(props => <App {...props}/>);
