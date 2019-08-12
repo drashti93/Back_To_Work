@@ -245,12 +245,12 @@ render(){
                             <div className="form-row">
                                 <div className="col-lg-6 col-md-6 mb-6">
                                     <label htmlFor="validationServer02">Tutorial Category</label>
-                                    <input className="form-control" placeholder="Job Category" onChange={this.onChangeCategory.bind(this)} required/>
+                                    <input className="form-control" placeholder="Category" onChange={this.onChangeCategory.bind(this)} required/>
                                     <span className="error-span">{this.state.passwordError}</span>
                                 </div>
                                 <div className="col-lg-6 col-md-6 mb-6">
                                     <label htmlFor="validationServer01">Tutorial Title</label>
-                                    <input lassName="form-control" placeholder="Job Title" onChange={this.onChangeTitle.bind(this)} required/>
+                                    <input lassName="form-control" placeholder="Title" onChange={this.onChangeTitle.bind(this)} required/>
                                     <span className="error-span">{this.state.newPasswordError}</span>
                                 </div>
                                 
@@ -364,7 +364,7 @@ render(){
                                     <td>C123</td>
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style={{"width": "33.33%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">33.33%</div>
+                                            <div class="progress-bar" role="progressbar" style={{"width": "28.28%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">28.28%</div>
                                         </div>
                                     </td>
                                 </tr>

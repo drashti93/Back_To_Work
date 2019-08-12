@@ -136,7 +136,7 @@ class DevOps extends Component {
                                                                 
                                                             }) : ""
                                                         }
-                                                        <tr>
+                                                        {/* <tr>
                                                             <th scope="row">1</th>
                                                             <td><a href="https://vmware.wd1.myworkdayjobs.com/en-US/VMware/job/BGR-Sofia/Senior-Infrastructure-Engineer---DevOps_R183380">Site Reliability Engineer</a></td>
                                                             <td>Engineer who is comfortable with coding and interested in building out tools and infrastructure</td>
@@ -150,7 +150,7 @@ class DevOps extends Component {
                                                             <th scope="row">3</th>
                                                             <td><a href="https://vmware.wd1.myworkdayjobs.com/en-US/VMware/job/JPN-Tokyo/Sr-DevOps-Engineer_R1812629">DevOps Lead</a></td>
                                                             <td>Senior-level DevOps Engineer to help in the design and build and deployment and production support of a complex Cloud-based infrastructure</td>
-                                                        </tr>
+                                                        </tr> */}
                                                     </tbody>
                                                 </table>
                                             </div>

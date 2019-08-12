@@ -64,11 +64,11 @@ export function getTutorials(type) {
     return function(dispatch){
         axios.get(`http://localhost:8000/api/getTutorials?type=`+type, {type})
         .then(function (response) {
-            console.log(response)
+            console.log("Tutorial", response)
             if(response.status===200) {
                     dispatch({
                         type: "TUTORIAL_LIST_SUCCESS",
-                        payload: response.data.joblist
+                        payload: response.data.tutorial_list
                     })
             }
             else {

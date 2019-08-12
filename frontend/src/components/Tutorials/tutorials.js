@@ -13,7 +13,8 @@ class Homepage extends Component {
     constructor(props){
         super(props)
         this.state = {
-            progress: "0%"
+            progress: "0%",
+            isHidden: "false"
         }
 
         this.changeProgress = this.changeProgress.bind(this)
@@ -27,18 +28,31 @@ class Homepage extends Component {
     componentDidMount(){
         this.props.getjobs("devops");
         this.props.getTutorials("devops")
+
+        if(localStorage.getItem("recruiter")){
+            this.setState({
+                isHidden: true
+            })
+        }
+        if(localStorage.getItem("candidate")){
+            this.setState({
+                isHidden: false
+            })
+        }
     }
 
     changeProgress(){
         console.log("changing logs")
+        var progress = parseInt(this.state.progress, 10) + (100/(this.props.tutorial_list.length))
         this.setState({
-            progress: "16.66%"
+            progress: progress+"%"
         })
+        console.log(typeof(this.state.progress))
     }
     changeProgress1(){
         console.log("changing logs")
         this.setState({
-            progress: "33.33%"
+            progress: this.state.progress + 16.66
         })
     }
     
@@ -64,14 +78,18 @@ class Homepage extends Component {
                             return (
                                 <div className="col-sm-4" >
                                     <div class="col-md-12">
-                                        <ReactPlayer width={340} height={220} class="react_player" url={tutorial.url} playing />
+                                        <ReactPlayer width={340} height={220} class="react_player" url={tutorial.url} />
+                                        <div class="form-check" hidden={this.state.isHidden}>
+                                            <input type="checkbox"  onClick={() => this.changeProgress()} class="form-check-input" id="exampleCheck1"/>
+                                            <label class="form-check-label" for="exampleCheck1">Complete</label>
+                                        </div>
                                         <div><h3>{tutorial.title}</h3></div>
                                     </div>
                                 </div>
                             )
                         }) : ""
                     }
-                        <div className="col-sm-4" >
+                        {/* <div className="col-sm-4" >
                             <div class="col-md-12">
                                 <ReactPlayer width={340} height={220} class="react_player" url='http://www.youtube.com/watch?v=Bv_5Zv5c-Ts' playing />
                                 <div class="form-check">
@@ -100,9 +118,9 @@ class Homepage extends Component {
                                 </div>
                                 <div><h3>DevOps</h3></div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
-                    <div className="row  video-row">
+                    {/* <div className="row  video-row">
                         <div className="col-sm-4" >
                             <div class="col-md-12">
                                 <ReactPlayer width={340} height={220} class="react_player" url='http://www.youtube.com/watch?v=7m3f-P-WWbg'  />
@@ -134,7 +152,7 @@ class Homepage extends Component {
                             </div>
                             
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 
             </div>
