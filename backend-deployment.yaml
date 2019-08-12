@@ -15,8 +15,8 @@ spec:
         tier: backend
     spec:
       containers:
-      - name: back-to-work-frontend
-        image: yi0909/codehouse:backend
+      - name: back-to-work-backend
+        image: drustithakkar/back_to_work:backend
         imagePullPolicy: Always
         resources:
           requests:

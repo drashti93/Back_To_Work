@@ -13,10 +13,12 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 require('dotenv').config({path: "../../.env"})
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+ window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ latency: 0 }) : compose;
+
 const store = createStore(
   reducer,
-  composeEnhancer(applyMiddleware(thunk))
+  composeEnhancer(applyMiddleware(thunk)),
 );
 
 ReactDOM.render(

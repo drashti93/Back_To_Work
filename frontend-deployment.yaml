@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: back-to-work-frontend
-        image: yi0909/codehouse:frontend
+        image: drustithakkar/back_to_work:frontend
         imagePullPolicy: Always
         resources:
           requests:

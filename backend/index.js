@@ -9,7 +9,7 @@ var mongoose = require('./src/resources/mongoose')
 
 app.use(
   cors({
-      origin: `http://localhost:3000`,
+      origin: `*`,
       credentials: true
   })
 );

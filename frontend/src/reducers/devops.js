@@ -4,7 +4,7 @@ const reducer = (state = initial, action) => {
     switch (action.type) {
 
         case "JOB_LIST_SUCCESS" : {
-			console.log("userID Payload " + action.payload)
+			console.log("userID Payload " , action.payload)
             console.log("reducer fired")
 			return {...state, job_list: action.payload};
         }
@@ -14,7 +14,7 @@ const reducer = (state = initial, action) => {
         }
 
         case "TUTORIAL_LIST_SUCCESS": {
-            return {...state, job_list: action.payload};
+            return {...state, tutorial_list: action.payload};
         }
 
         case "TUTORIAL_LIST_FAILURE": {

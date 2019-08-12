@@ -27,7 +27,7 @@ class NaviBar extends Component{
 		
 	}
 
-    componentWillMound(){
+    componentWillMount(){
         if(localStorage.getItem("user")){
             this.setState({
                 isHidden: "true"
@@ -104,7 +104,8 @@ class NaviBar extends Component{
             isFormValid = false;
         }
         if(isFormValid){
-            localStorage.setItem("user", this.state.username)
+            console.log("setting item")
+            window.localStorage.setItem("user", this.state.username)
             this.setState({isHidden: "true"})
         }
     }
@@ -273,16 +274,6 @@ render(){
 
 function mapStateToProps(state) {
     return {
-    	// isSigned: state.auth.isSigned,
-        // message: state.auth.message,
-        // isLogged: state.auth.isLogged,
-        // username: state.auth.username,
-        // isHidden: state.auth.isHidden,
-        // changed: state.auth.changed,
-        // diagram_updated: state.auth.diagram_updated,
-        // users: state.auth.users,
-        // password_reset: state.auth.password_reset,
-        // info: state.auth.info,
         job_list: state.devops.job_list,
         tutorial_list: state.devops.tutorial_list,
     };
@@ -290,9 +281,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-    	// addAdmin : (firstname,lastname,username,password, user, email) => dispatch(actions.addAdmin(firstname,lastname,username,password, user, email)),
-        // login : (username,password) => dispatch(actions.login(username,password)),
-        // logout : () => dispatch(actions.logout()),
         submitJob: (category, title, desc, url) => dispatch(actions.submitJob(category, title, desc, url)),
         submitTutorial: (category, title, url) => dispatch(actions.submitTutorial(category, title, url)),
         getjobs: (type) => dispatch(actions.getjobs(type)),
