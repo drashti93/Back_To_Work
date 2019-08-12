@@ -27,11 +27,23 @@ class NaviBar extends Component{
 		
 	}
 
+    componentWillMound(){
+        if(localStorage.getItem("user")){
+            this.setState({
+                isHidden: "true"
+            })
+            localStorage.setItem("user", this.state.username)
+        }
+    }
+
     componentDidMount(){
         if(localStorage.getItem("user")){
             this.setState({
                 isHidden: "true"
             })
+            localStorage.setItem("user", this.state.username)
+            this.props.getjobs("devops");
+            this.props.getTutorials("devops")
         }
     }
 
@@ -272,6 +284,7 @@ function mapStateToProps(state) {
         // password_reset: state.auth.password_reset,
         // info: state.auth.info,
         job_list: state.devops.job_list,
+        tutorial_list: state.devops.tutorial_list,
     };
 }
 
@@ -283,6 +296,7 @@ function mapDispatchToProps(dispatch) {
         submitJob: (category, title, desc, url) => dispatch(actions.submitJob(category, title, desc, url)),
         submitTutorial: (category, title, url) => dispatch(actions.submitTutorial(category, title, url)),
         getjobs: (type) => dispatch(actions.getjobs(type)),
+        getTutorials: (type) => dispatch(actions.getTutorials(type)),
     };
 }
 

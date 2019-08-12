@@ -20,6 +20,7 @@ class LandingPage extends Component {
 
     componentDidMount(){
         this.props.getjobs("devops");
+        this.props.getTutorials("devops")
     }
     
 

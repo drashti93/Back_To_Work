@@ -25,6 +25,7 @@ class Homepage extends Component {
 
     componentDidMount(){
         this.props.getjobs("devops");
+        this.props.getTutorials("devops")
     }
     
     render(){
@@ -103,13 +104,15 @@ class Homepage extends Component {
 
 function mapStateToProps(state) {
     return {
-        tutorial_list: state.devops.tutorial_list
+        tutorial_list: state.devops.tutorial_list,
+        job_list: state.devops.job_list,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getTutorials: (type) => dispatch(actions.getTutorials(type))
+        getTutorials: (type) => dispatch(actions.getTutorials(type)),
+        getjobs: (type) => dispatch(actions.getjobs(type)),
     };
 }
 
