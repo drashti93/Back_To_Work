@@ -24,6 +24,11 @@ class App extends Component {
   }
   
 render(){
+  var access = false;
+  if(localStorage.getItem("candidate") || localStorage.getItem("recruiter")) {
+    access = true;
+  }
+  console.log("access", access)
   return (
     <BrowserRouter>
       <Switch>

@@ -73,6 +73,7 @@ class DevOps extends Component {
       }
 
     render(){
+        if(localStorage.getItem("candidate") || localStorage.getItem("recruiter")){
         return(
             <div>
                 <Navibar></Navibar>
@@ -336,6 +337,12 @@ class DevOps extends Component {
                 </div>
             </div>
         );
+        }
+        else {
+            return(
+                <div>You do not have sufficient access</div>
+            )
+        }
     }
 }
 
