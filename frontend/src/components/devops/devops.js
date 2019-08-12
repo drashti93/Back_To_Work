@@ -16,14 +16,61 @@ class DevOps extends Component {
         super(props)
         this.state = {
             isPopoverOpen: false,
-            isPopoverOpen1: false
+            isPopoverOpen1: false,
+            joblist: [],
+            tutorial_list: [],
+            message: {
+                to: '',
+                body: '',
+            },
+            submitting: false,
+            error: false
         }
-    }
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onHandleChange = this.onHandleChange.bind(this);
+    };
 
     componentDidMount(){
         this.props.getjobs("devops");
+        this.props.getTutorials("devops")
     }
     
+    onSubmit(event) {
+        event.preventDefault();
+        this.setState({ submitting: true });
+        fetch('http://localhost:8000/api/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.state.message)
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              this.setState({
+                error: false,
+                submitting: false,
+                message: {
+                  to: '',
+                  body: ''
+                }
+              });
+            } else {
+              this.setState({
+                error: true,
+                submitting: false
+              });
+            }
+          });
+      }
+
+      onHandleChange(event) {
+        const name = event.target.getAttribute('name');
+        this.setState({
+          message: { ...this.state.message, [name]: event.target.value }
+        });
+      }
 
     render(){
         return(
@@ -31,7 +78,7 @@ class DevOps extends Component {
                 <Navibar></Navibar>
                 <div>
                     <Helmet>
-                    <title>SJ Labs</title>
+                    <title>Devops</title>
                     </Helmet>
                 </div>
                 <div className="container-fluid" id="landing-image-container">
@@ -76,6 +123,18 @@ class DevOps extends Component {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {
+                                                            this.props.job_list ? this.props.job_list.map((job, index) => {
+                                                                return(
+                                                                    <tr>
+                                                                        <th scope="row">{index+1}</th>
+                                                                        <td><a href={job.url}>{job.title}</a></td>
+                                                                        <td>{job.description}</td>
+                                                                    </tr>
+                                                                )
+                                                                
+                                                            }) : ""
+                                                        }
                                                         <tr>
                                                             <th scope="row">1</th>
                                                             <td><a href="https://vmware.wd1.myworkdayjobs.com/en-US/VMware/job/BGR-Sofia/Senior-Infrastructure-Engineer---DevOps_R183380">Site Reliability Engineer</a></td>
@@ -188,12 +247,56 @@ class DevOps extends Component {
                                             <div class="card-body">
                                                 <h5 class="card-title" style={{"fontSize": "23px"}}>Message</h5>
                                                 <p class="card-text">Send a message to your recruiter</p>
-                                                <a  href="/" target="_blank" rel="noopener noreferrer">Click Here ></a>
+                                                <a  data-container="body" data-toggle="modal" data-target=".bd-example-modal-lg2" href="" >Click Here ></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div className="modal fade bd-example-modal-lg2" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-lg" role="document">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Jobs</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <form
+                                                onSubmit={this.onSubmit}
+                                                className={this.state.error ? 'error sms-form' : 'sms-form'}
+                                            >
+                                                <div>
+                                                <label htmlFor="to">To:</label>
+                                                <input
+                                                    type="tel"
+                                                    name="to"
+                                                    id="to"
+                                                    value={this.state.message.to}
+                                                    onChange={this.onHandleChange}
+                                                />
+                                                </div>
+                                                <div>
+                                                <label htmlFor="body">Body:</label>
+                                                <textarea
+                                                    name="body"
+                                                    id="body"
+                                                    value={this.state.message.body}
+                                                    onChange={this.onHandleChange}
+                                                />
+                                                </div>
+                                                <button type="submit" disabled={this.state.submitting}>
+                                                Send message
+                                                </button>
+                                            </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                         <div className="col-sm widget-col">
                             <div className="container widget-inner-container">
@@ -238,13 +341,15 @@ class DevOps extends Component {
 
 function mapStateToProps(state) {
     return {
-        
+        job_list: state.devops.job_list,
+        tutorial_list: state.devops.tutorial_list
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         getjobs: (type) => dispatch(actions.getjobs(type)),
+        getTutorials: (type) => dispatch(actions.getTutorials(type))
     };
 }
 

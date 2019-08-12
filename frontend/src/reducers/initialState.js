@@ -1,3 +1,4 @@
 export default {
-    job_list: []
+    job_list: [],
+    tutorial_list: [],
 }

@@ -1,81 +1,81 @@
 
-#f5logo{
+#f5logo1{
     height: 50px;
     /* width: 50px; */
 }
 
-.widget-container{
+.widget-container1{
     align-content: center;
     padding: 30px;
 }
 
-.widget-row {
+.widget-row1 {
     text-align: center;
     
 }
 
-.widget-col {
+.widget-col1 {
    align-content: center;
 }
 
-.widget-inner-container {
+.widget-inner-container1 {
     align-content: center;
     max-width: 440px !important;
 }
 
-.fas, .far{
+.fas, .far, .fab{
     font-size: 80px;
     /* font-weight: normal; */
     margin: 30px;
     color: purple
 }
 
-.icon-anchor {
+.icon-anchor1 {
     color: inherit;
     text-decoration: none;
     
 }
 
-.icon-anchor:hover{
+.icon-anchor1:hover{
     color: dimgray; 
 }
 
-#landing-image-container{
+#landing-image-container1{
 padding: 0;
 height: 300px;
 }
 
-#image-landing {
+#image-landing1 {
     width: 100%;
     height: 100%;
     
 }
 
-#landing-image-container{
+#landing-image-container1{
     position: relative;
 }
 
 
-.text-block {
+.text-block1 {
     position: absolute;
     font-size: 70px;
     top: 40%;
     bottom: 40%;
-    left: 6%;
+    left: 39%;
     color: white;
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
   }
 
-  .fa-info-circle{
+  .fa-info-circle1{
       font-size: 18px;
       display: inline;
       margin: 5px;
       color: black;
   }
 
-  #popover-div{
+  #popover-div1{
     border: solid grey 1px;
     padding: 10px;
     background: white;

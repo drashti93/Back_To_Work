@@ -13,6 +13,14 @@ const reducer = (state = initial, action) => {
             return {...state, job_list: []}
         }
 
+        case "TUTORIAL_LIST_SUCCESS": {
+            return {...state, job_list: action.payload};
+        }
+
+        case "TUTORIAL_LIST_FAILURE": {
+            return {...state, tutorial_list: []}
+        }
+
         default :
             return state;
     }
