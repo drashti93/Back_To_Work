@@ -1,0 +1,52 @@
+.row{
+    align-content: center
+}
+
+.navbar-button {
+    align-self: auto
+}
+
+.admin-tasks {
+    position: absolute;
+    bottom: 0px;
+}
+
+.tiles-container{
+    margin-top: 40px;
+}
+
+.card-div {
+    border-radius: 100px;
+}
+
+#fas-delete, #fas-edit {
+    font-size: 20px;
+    display: inline;
+    margin: 3px;
+}
+
+#fas-delete:hover, #fas-edit:hover {
+    color: dimgray
+}
+
+.card-title {
+    display: inline
+}
+
+.pageButton{
+    float: left;
+    border-radius: 0;
+    border: none;
+    font-size: 17px;
+    margin: 3px;
+}
+
+.video-row{
+    align-content: center;
+    text-align: center;
+}
+
+.react_player{
+    margin: 20px;
+    margin-left: 0;
+}

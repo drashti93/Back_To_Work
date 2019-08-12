@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cors = require('cors');
 var MongoDBStore = require('connect-mongodb-session')(session);
-
+var devops = require("./src/routes/devops")
 var mongoose = require('../backend/src/resources/mongoose')
 
 app.use(
@@ -54,6 +54,8 @@ app.use(function(req, res, next) {
   res.setHeader("Cache-Control", "no-cache");
   next();
 });
+
+app.use('/api', devops)
 
 app.listen(8000);
 console.log("Server listening on port 8000");
