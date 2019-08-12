@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: Back_To_Work
       tier: frontend
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: back-to-work-frontend
-        image: docker.io/yi0909/codehouse:frontend
-        imagePullPolicy: Always
+        image: yi0909/codehouse:frontend-test
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             cpu: 100m
@@ -31,4 +31,4 @@ spec:
           # line below:
           # value: env
         ports:
-        - containerPort: 80
+        - containerPort: 3000
