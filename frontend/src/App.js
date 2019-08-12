@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
-import LandingPage from "./components/landingPage/devops"
+import Devops from "./components/devops/devops"
+import LandingPage from "./components/landingPage/landingPage"
 import Tutorials from "./components/Tutorials/tutorials"
 // import * as actions from "../src/actions/auth"
 import {connect} from 'react-redux';
@@ -28,6 +29,7 @@ render(){
       <Switch>
         <Route exact path="/" component={LandingPage}></Route>
         <Route exact path="/tutorials" component={Tutorials}></Route>
+        <Route exact path="/devops" component={Devops}></Route>
       </Switch>
     </BrowserRouter>
     );

@@ -3,7 +3,7 @@ import devops from "./devops"
 
 const rootReducer = combineReducers({
 
-    devops
+    devops,
 })
 
 export default rootReducer;

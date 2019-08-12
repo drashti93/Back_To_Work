@@ -18,6 +18,7 @@ class NaviBar extends Component{
             title: "",
             desc: "",
             url: "",
+            isHidden: "",
         }
         
     }
@@ -27,11 +28,19 @@ class NaviBar extends Component{
 	}
 
     componentDidMount(){
-        
+        if(localStorage.getItem("user")){
+            this.setState({
+                isHidden: "true"
+            })
+        }
     }
 
     submitJob(){
         this.props.submitJob(this.state.category, this.state.title, this.state.desc, this.state.url)
+    }
+
+    submittutorial(){
+        this.props.submitTutorial(this.state.category, this.state.title, this.state.url)
     }
 
     onChangeCategory(e){
@@ -57,6 +66,37 @@ class NaviBar extends Component{
             url: e.target.value
         })
     }
+
+    onChangeUsername(e) {
+        this.setState({
+            username: e.target.value,
+            usernameError: "",
+        })
+    }
+
+    onChangePassword(e) {
+        this.setState({
+            password: e.target.value,
+            passwordError: "",
+        })
+    }
+
+    handleSignin(){
+        let isFormValid = true;
+        if(this.state.username === ''){
+            this.setState({usernameError:"Please enter your Username"});
+            isFormValid = false;
+        }
+        if(this.state.password === ''){
+            this.setState({passwordError:"Please enter your Password"});
+            isFormValid = false;
+        }
+        if(isFormValid){
+            localStorage.setItem("user", this.state.username)
+            this.setState({isHidden: "true"})
+        }
+    }
+
 render(){
     
     return (
@@ -75,18 +115,20 @@ render(){
                                 </div>
                             </div>
                             <ul className="navbar-nav ml-md-auto">
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link" href="/">Home</a>
-                                </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/" data-toggle="modal" data-target="#exampleModal3" hidden={!this.props.isHidden}>Admin Login</a>
+                                    <a className="nav-link" hidden={this.state.isHidden} href="/" data-toggle="modal" data-target="#exampleModal4" >Recruiter Login</a>
                                 </li>
-                                <li class="nav-item dropdown dropdown-li" hidden={this.props.isHidden}>
-                                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        {this.props.username}
+                                <li className="nav-item dropdown">
+                                    <a hidden={!this.state.isHidden} className="nav-link" href="/">Home</a>
+                                </li>
+                                <li class="nav-item dropdown pull-left" hidden={!this.state.isHidden}>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {localStorage.getItem("user")}
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="/" data-toggle="modal" data-target="#exampleModal2">Add Job Listing</a>
+                                        <a class="dropdown-item" href="/" data-toggle="modal" data-target="#exampleModal3">Add New Tutorial</a>
+                                        <a class="dropdown-item" href="/" onClick={localStorage.removeItem("user")}>Logout</a>
                                     </div>
                                 </li>
                             </ul>
@@ -140,6 +182,79 @@ render(){
                     </div>
                 </div>
             </div>
+        <div className="modal fade" id="exampleModal3" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Add New Tutorial</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <span className="error-span">{this.state.formError}</span>
+                        <form>
+                            <div className="form-row">
+                                <div className="col-lg-6 col-md-6 mb-6">
+                                    <label htmlFor="validationServer02">Tutorial Category</label>
+                                    <input className="form-control" placeholder="Job Category" onChange={this.onChangeCategory.bind(this)} required/>
+                                    <span className="error-span">{this.state.passwordError}</span>
+                                </div>
+                                <div className="col-lg-6 col-md-6 mb-6">
+                                    <label htmlFor="validationServer01">Tutorial Title</label>
+                                    <input lassName="form-control" placeholder="Job Title" onChange={this.onChangeTitle.bind(this)} required/>
+                                    <span className="error-span">{this.state.newPasswordError}</span>
+                                </div>
+                                
+                                <div className="col-lg-12 col-md-12 mb-12">
+                                    <label htmlFor="validationServer01">URL</label>
+                                    <input className="form-control" placeholder="URL" onChange={this.onChangeUrl.bind(this)} required/>
+                                    <span className="error-span">{this.state.newPasswordError}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary" onClick={() => this.submittutorial()}>Save changes</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div className="modal fade" id="exampleModal4" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Login</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <span className="error-span">{this.state.formError}</span>
+                        <form>
+                            <div className="form-row">
+                                <div className="col-lg-12 col-md-12 mb-12">
+                                    <label htmlFor="validationServer01">Username</label>
+                                    <input type="text" className="form-control" placeholder="Username" onChange={this.onChangeUsername.bind(this)} required/>
+                                    <span className="error-span">{this.state.usernameError}</span>
+                                </div>
+                                <div className="col-lg-12 col-md-12 mb-12">
+                                    <label htmlFor="validationServer02">Password</label>
+                                    <input type="password" className="form-control" placeholder="Password" onChange={this.onChangePassword.bind(this)} required/>
+                                    <span className="error-span">{this.state.passwordError}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="modal-footer">
+                        
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary" onClick={() => this.handleSignin()}>Login</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )}
 }
@@ -156,6 +271,7 @@ function mapStateToProps(state) {
         // users: state.auth.users,
         // password_reset: state.auth.password_reset,
         // info: state.auth.info,
+        job_list: state.devops.job_list,
     };
 }
 
@@ -164,8 +280,9 @@ function mapDispatchToProps(dispatch) {
     	// addAdmin : (firstname,lastname,username,password, user, email) => dispatch(actions.addAdmin(firstname,lastname,username,password, user, email)),
         // login : (username,password) => dispatch(actions.login(username,password)),
         // logout : () => dispatch(actions.logout()),
-        submitJob: (category, title, desc, url) => dispatch(actions.submitJob(category, title, desc, url))
-       
+        submitJob: (category, title, desc, url) => dispatch(actions.submitJob(category, title, desc, url)),
+        submitTutorial: (category, title, url) => dispatch(actions.submitTutorial(category, title, url)),
+        getjobs: (type) => dispatch(actions.getjobs(type)),
     };
 }
 

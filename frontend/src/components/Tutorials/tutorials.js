@@ -5,7 +5,7 @@ import "./tutorials.css"
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ReactPlayer from 'react-player'
-import swal from "sweetalert";
+import * as actions from "../../actions/devops"
 require('dotenv').config()
 
 class Homepage extends Component {
@@ -24,7 +24,7 @@ class Homepage extends Component {
     }
 
     componentDidMount(){
-        
+        this.props.getjobs("devops");
     }
     
     render(){
@@ -42,21 +42,33 @@ class Homepage extends Component {
                 </div>
                 <div className="container tiles-container">
                     <div className="row video-row">
+                    {
+                        this.props.tutorial_list ? this.props.tutorial_list.map((tutorial, index) => {
+                            return (
+                                <div className="col-sm-4" >
+                                    <div class="col-md-12">
+                                        <ReactPlayer width={340} height={220} class="react_player" url={tutorial.url} playing />
+                                        <div><h3>{tutorial.title}</h3></div>
+                                    </div>
+                                </div>
+                            )
+                        }) : ""
+                    }
                         <div className="col-sm-4" >
                             <div class="col-md-12">
-                                <ReactPlayer width={340} height={220} class="react_player" url='https://www.youtube.com/watch?v=Bv_5Zv5c-Ts' playing />
+                                <ReactPlayer width={340} height={220} class="react_player" url='http://www.youtube.com/watch?v=Bv_5Zv5c-Ts' playing />
                                 <div><h3>Kubernetes</h3></div>
                             </div>
                         </div>
                         <div className="col-sm-4" >
                             <div class="col-md-12">
-                                <ReactPlayer width={340} height={220} class="react_player" url='https://www.youtube.com/watch?v=pGYAg7TMmp0'  />
+                                <ReactPlayer width={340} height={220} class="react_player" url='http://www.youtube.com/watch?v=pGYAg7TMmp0'  />
                                 <div><h3>Docker</h3></div>
                             </div>
                         </div>
                         <div className="col-sm-4" >
                             <div class="col-md-12">
-                                <ReactPlayer width={340} height={220} class="react_player" url='https://www.youtube.com/watch?v=_I94-tJlovg&t=4s'  />
+                                <ReactPlayer width={340} height={220} class="react_player" url='http://www.youtube.com/watch?v=_I94-tJlovg&t=4s'  />
                                 <div><h3>DevOps</h3></div>
                             </div>
                         </div>
@@ -64,19 +76,19 @@ class Homepage extends Component {
                     <div className="row">
                         <div className="col-sm-4" >
                             <div class="col-md-12">
-                                <ReactPlayer width={340} height={220} class="react_player" url='https://www.youtube.com/watch?v=7m3f-P-WWbg'  />
+                                <ReactPlayer width={340} height={220} class="react_player" url='http://www.youtube.com/watch?v=7m3f-P-WWbg'  />
                                 <div><h3>VMWare Workstation</h3></div>
                             </div>
                         </div>
                         <div className="col-sm-4" >
                             <div class="col-md-12">
-                                <ReactPlayer width={340} height={220} class="react_player"  url='https://www.youtube.com/watch?v=GHvRuix3he8'  />
+                                <ReactPlayer width={340} height={220} class="react_player"  url='http://www.youtube.com/watch?v=GHvRuix3he8'  />
                                 <div><h3>Kind</h3></div>
                             </div>
                         </div>
                         <div className="col-sm-4" >
                             <div class="col-md-12">
-                                <ReactPlayer width={340} height={220} class="react_player" url='https://www.youtube.com/watch?v=YS4e4q9oBaU'  />
+                                <ReactPlayer width={340} height={220} class="react_player" url='http://www.youtube.com/watch?v=YS4e4q9oBaU'  />
                                 <div><h3>GoLang</h3></div>
                             </div>
                             
@@ -91,13 +103,13 @@ class Homepage extends Component {
 
 function mapStateToProps(state) {
     return {
-        
+        tutorial_list: state.devops.tutorial_list
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        
+        getTutorials: (type) => dispatch(actions.getTutorials(type))
     };
 }
 
