@@ -5,7 +5,7 @@ var session = require('express-session');
 var cors = require('cors');
 var MongoDBStore = require('connect-mongodb-session')(session);
 var devops = require("./src/routes/devops")
-var mongoose = require('../backend/src/resources/mongoose')
+var mongoose = require('./src/resources/mongoose')
 
 app.use(
   cors({

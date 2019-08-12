@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: back-to-work-frontend
-        image: yi0909/codehouse:frontend-test
-        imagePullPolicy: IfNotPresent
+        image: yi0909/codehouse:backend
+        imagePullPolicy: Always
         resources:
           requests:
             cpu: 100m
